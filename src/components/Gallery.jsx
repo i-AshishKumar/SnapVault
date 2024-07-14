@@ -23,7 +23,7 @@ import CaptureUpload from './CaptureUpload';
 
 import { useAuth } from '../context/AuthContext';
 
-const API_ENDPOINT = 'https://95ffpw0uhb.execute-api.us-east-1.amazonaws.com/dev/upload';
+const API_ENDPOINT = 'https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/upload';
 
 const Gallery = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);

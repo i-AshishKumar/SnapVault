@@ -38,7 +38,7 @@ const RegistrationForm = () => {
     const binaryImage = Buffer.from(base64Image, 'base64');
 
     try {
-      await fetch(`https://w4q4t12etf.execute-api.us-east-1.amazonaws.com/dev/employee-images-cloud-proj/${fileName}.jpeg`, {
+      await fetch(`https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/employee-images-cloud-proj/${fileName}.jpeg`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'image/jpeg',
