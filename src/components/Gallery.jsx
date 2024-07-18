@@ -22,14 +22,18 @@ import { DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
 import CaptureUpload from './CaptureUpload';
 
 import { useAuth } from '../context/AuthContext';
+import { useApiGateway } from '../context/ApiGatewayContext';
 
-const API_ENDPOINT = 'https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/upload';
+
 
 const Gallery = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [images, setImages] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+
+    // const api_endpoint = "https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/"
+    const api_endpoint = `${useApiGateway()}dev/gallery`
   
   const { rekognitionId } = useAuth();
 
@@ -52,7 +56,7 @@ const Gallery = () => {
         rekognitionId: rekognitionId,
       }
     });
-    const response = await axios.post(API_ENDPOINT, payload);
+    const response = await axios.post(api_endpoint, payload);
     console.log(response);
     const files = JSON.parse(response.data.body)['files'];
     const images = files.map(file => ({
@@ -80,7 +84,7 @@ const Gallery = () => {
         }
       });
 
-      await axios.post(API_ENDPOINT, payload);
+      await axios.post(api_endpoint, payload);
 
       fetchImages();
     };
@@ -107,7 +111,7 @@ const Gallery = () => {
       }
     });
 
-    await axios.post(API_ENDPOINT, payload);
+    await axios.post(api_endpoint, payload);
     fetchImages();
   };
 

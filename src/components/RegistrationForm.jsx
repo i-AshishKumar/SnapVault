@@ -2,6 +2,8 @@ import React, { useState, useRef, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { Buffer } from 'buffer';
 
+import { useApiGateway } from '../context/ApiGatewayContext';
+
 import {
   Box,
   Button,
@@ -18,6 +20,8 @@ import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
+  //const api_endpoint = "https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/"
+  const api_endpoint = useApiGateway()
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -38,7 +42,7 @@ const RegistrationForm = () => {
     const binaryImage = Buffer.from(base64Image, 'base64');
 
     try {
-      await fetch(`https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/employee-images-cloud-proj/${fileName}.jpeg`, {
+      await fetch(`${api_endpoint}dev/user-faces-cloud-term-2024/${fileName}.jpeg`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'image/jpeg',

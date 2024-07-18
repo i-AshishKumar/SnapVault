@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 
+
 function Home() {
   return (
     <Box p={8} maxW="xl" mx="auto" mt={8}>

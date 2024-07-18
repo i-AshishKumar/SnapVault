@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
+import { useApiGateway } from '../context/ApiGatewayContext';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -29,8 +30,11 @@ const LoginForm = () => {
     setImage(imageSrc);
   }, [webcamRef]);
 
+  // const api_endpoint = "https://wix1azv9n1.execute-api.us-east-1.amazonaws.com"
+  const api_endpoint = useApiGateway()
+  console.log(api_endpoint)
   async function authenticate(visitorImageName) {
-    const requestUrl = 'https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/employee?' + new URLSearchParams({
+    const requestUrl = `${api_endpoint}dev/user?` + new URLSearchParams({
       objectKey: `${visitorImageName}.jpeg`,
     });
 
@@ -55,7 +59,7 @@ const LoginForm = () => {
     const base64Image = image.split(',')[1];
     const binaryImage = Buffer.from(base64Image, 'base64');
 
-    fetch(`https://wix1azv9n1.execute-api.us-east-1.amazonaws.com/dev/visitor-images-cloud-proj/${visitorImageName}.jpeg`, {
+    fetch(`${api_endpoint}dev/visitor-faces-cloud-term-2024/${visitorImageName}.jpeg`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'image/jpeg',
